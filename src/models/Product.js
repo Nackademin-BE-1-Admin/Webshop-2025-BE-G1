@@ -1,27 +1,28 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema({
-  name: {
+  namn: {
     type: String,
     required: true,
-    trim: true
+    trim: true,
   },
-  price: {
+  beskrivning: {
+    type: String,
+    default: "",
+  },
+  pris: {
     type: Number,
     required: true,
-    min: 0
+    min: 0,
   },
-  description: {
-    type: String,
-    default: ''
-  },
-  stock: {
-    type: Number,
-    default: 0,
-    min: 0
-  }
+  kategorier: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+    },
+  ],
 }, {
-  timestamps: true
+  timestamps: true,
 });
 
-export default mongoose.model('Product', productSchema);
+export default mongoose.model("Product", productSchema);

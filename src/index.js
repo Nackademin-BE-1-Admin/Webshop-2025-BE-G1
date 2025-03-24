@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import authRoutes from './routes/auth.js';
 import productRoutes from './routes/products.js';
+import categoryRoutes from './routes/categories.js';
 
 dotenv.config();
 
@@ -39,9 +40,10 @@ app.get('/api', (req, res) => {
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
+app.use('/api/categories', categoryRoutes);
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/hakim-livs')
+mongoose.connect(process.env.MONGODB_URI/*  || "mongodb://localhost:27017/hakim-livs"*/)
   .then(() => console.log('Connected to MongoDB', process.env.MONGODB_URI))
   .catch(err => console.error('MongoDB connection error:', err));
 

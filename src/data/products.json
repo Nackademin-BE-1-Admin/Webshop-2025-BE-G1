@@ -1,29 +1,437 @@
 [
-    {
-        "_id": "1",
-        "name": "Banana",
-        "price": 0.29,
-        "description": "A banana is an edible fruit – botanically a berry – produced by several kinds of large herbaceous flowering plants in the genus Musa.",
-        "stock": 100,
-        "createdAt": "2025-01-01T00:00:00.000Z",
-        "updatedAt": "2025-01-03T00:00:00.000Z"
-    },
-    {
-        "_id": "2",
-        "name": "Apple",
-        "price": 0.59,
-        "description": "An apple is an edible fruit produced by an apple tree.",
-        "stock": 50,
-        "createdAt": "2025-01-02T00:00:00.000Z",
-        "updatedAt": "2025-01-02T00:00:00.000Z"
-    },
-    {
-        "_id": "3",
-        "name": "Orange",
-        "price": 0.49,
-        "description": "The orange is the fruit of various citrus species in the family Rutaceae.",
-        "stock": 75,
-        "createdAt": "2025-01-03T00:00:00.000Z",
-        "updatedAt": "2025-01-03T00:00:00.000Z"
-    }
+  {
+    "namn": "äpple",
+    "beskrivning": "ekologisk röd äpple från spanien",
+    "pris": 10,
+    "kategorier": [
+      "frukter",
+      "ekologisk"
+    ]
+  },
+  {
+    "namn": "päron",
+    "beskrivning": "ekologisk gul päron från spanien",
+    "pris": 15.5,
+    "kategorier": [
+      "frukter",
+      "ekologisk"
+    ]
+  },
+  {
+    "namn": "banan",
+    "beskrivning": "gul banan från ecuador",
+    "pris": 5,
+    "kategorier": [
+      "frukter"
+    ]
+  },
+  {
+    "namn": "tomat",
+    "beskrivning": "ekologisk röd tomat från spanien",
+    "pris": 20,
+    "kategorier": [
+      "grönsaker",
+      "ekologisk"
+    ]
+  },
+  {
+    "namn": "gurka",
+    "beskrivning": "ekologisk grön gurka från spanien",
+    "pris": 10,
+    "kategorier": [
+      "grönsaker",
+      "ekologisk"
+    ]
+  },
+  {
+    "namn": "sallad",
+    "beskrivning": "ekologisk grön sallad från spanien",
+    "pris": 15,
+    "kategorier": [
+      "grönsaker",
+      "ekologisk"
+    ]
+  },
+  {
+    "namn": "kål",
+    "beskrivning": "grön kål från sverige",
+    "pris": 10,
+    "kategorier": [
+      "grönsaker"
+    ]
+  },
+  {
+    "namn": "morot",
+    "beskrivning": "morot från sverige",
+    "pris": 5,
+    "kategorier": [
+      "grönsaker"
+    ]
+  },
+  {
+    "namn": "potatis",
+    "beskrivning": "potatis från sverige",
+    "pris": 10,
+    "kategorier": [
+      "grönsaker"
+    ]
+  },
+  {
+    "namn": "apelsin",
+    "beskrivning": "söt apelsin från Spanien",
+    "pris": 12,
+    "kategorier": [
+      "frukter"
+    ]
+  },
+  {
+    "namn": "kiwi",
+    "beskrivning": "ekologisk grön kiwi från Italien",
+    "pris": 8,
+    "kategorier": [
+      "frukter",
+      "ekologisk"
+    ]
+  },
+  {
+    "namn": "druvor",
+    "beskrivning": "röda druvor från Grekland",
+    "pris": 25,
+    "kategorier": [
+      "frukter"
+    ]
+  },
+  {
+    "namn": "melon",
+    "beskrivning": "söt vattenmelon från Spanien",
+    "pris": 30,
+    "kategorier": [
+      "frukter"
+    ]
+  },
+  {
+    "namn": "persika",
+    "beskrivning": "ekologisk persika från Italien",
+    "pris": 18,
+    "kategorier": [
+      "frukter",
+      "ekologisk"
+    ]
+  },
+  {
+    "namn": "plommon",
+    "beskrivning": "mörka plommon från Frankrike",
+    "pris": 22,
+    "kategorier": [
+      "frukter"
+    ]
+  },
+  {
+    "namn": "nektarin",
+    "beskrivning": "gul nektarin från Spanien",
+    "pris": 20,
+    "kategorier": [
+      "frukter"
+    ]
+  },
+  {
+    "namn": "mango",
+    "beskrivning": "söt mango från Brasilien",
+    "pris": 35,
+    "kategorier": [
+      "frukter",
+      "exotisk"
+    ]
+  },
+  {
+    "namn": "ananas",
+    "beskrivning": "färsk ananas från Costa Rica",
+    "pris": 40,
+    "kategorier": [
+      "frukter",
+      "exotisk"
+    ]
+  },
+  {
+    "namn": "paprika",
+    "beskrivning": "röd paprika från Nederländerna",
+    "pris": 15,
+    "kategorier": [
+      "grönsaker"
+    ]
+  },
+  {
+    "namn": "sötpotatis",
+    "beskrivning": "orange sötpotatis från USA",
+    "pris": 18,
+    "kategorier": [
+      "grönsaker"
+    ]
+  },
+  {
+    "namn": "spenat",
+    "beskrivning": "ekologisk spenat från Danmark",
+    "pris": 12,
+    "kategorier": [
+      "grönsaker",
+      "ekologisk"
+    ]
+  },
+  {
+    "namn": "broccoli",
+    "beskrivning": "färsk broccoli från Sverige",
+    "pris": 22,
+    "kategorier": [
+      "grönsaker"
+    ]
+  },
+  {
+    "namn": "blomkål",
+    "beskrivning": "vit blomkål från Sverige",
+    "pris": 20,
+    "kategorier": [
+      "grönsaker"
+    ]
+  },
+  {
+    "namn": "aubergine",
+    "beskrivning": "lila aubergine från Spanien",
+    "pris": 25,
+    "kategorier": [
+      "grönsaker"
+    ]
+  },
+  {
+    "namn": "zucchini",
+    "beskrivning": "grön zucchini från Italien",
+    "pris": 18,
+    "kategorier": [
+      "grönsaker"
+    ]
+  },
+  {
+    "namn": "lök",
+    "beskrivning": "gul lök från Sverige",
+    "pris": 5,
+    "kategorier": [
+      "grönsaker"
+    ]
+  },
+  {
+    "namn": "vitlök",
+    "beskrivning": "färsk vitlök från Spanien",
+    "pris": 8,
+    "kategorier": [
+      "grönsaker"
+    ]
+  },
+  {
+    "namn": "ärtor",
+    "beskrivning": "färska ärtor från Sverige",
+    "pris": 15,
+    "kategorier": [
+      "grönsaker"
+    ]
+  },
+  {
+    "namn": "bönor",
+    "beskrivning": "gröna bönor från Kenya",
+    "pris": 18,
+    "kategorier": [
+      "grönsaker"
+    ]
+  },
+  {
+    "namn": "nötfärs",
+    "beskrivning": "nötfärs från Sverige",
+    "pris": 55,
+    "kategorier": [
+      "kött"
+    ]
+  },
+  {
+    "namn": "kycklingfilé",
+    "beskrivning": "färsk kycklingfilé från Sverige",
+    "pris": 45,
+    "kategorier": [
+      "kött"
+    ]
+  },
+  {
+    "namn": "köttfärs",
+    "beskrivning": "nötköttfärs från sverige",
+    "pris": 50,
+    "kategorier": [
+      "kött"
+    ]
+  },
+  {
+    "namn": "kyckling",
+    "beskrivning": "kyckling från sverige",
+    "pris": 40,
+    "kategorier": [
+      "kött"
+    ]
+  },
+  {
+    "namn": "fläsk",
+    "beskrivning": "fläskkött från sverige",
+    "pris": 30,
+    "kategorier": [
+      "kött"
+    ]
+  },
+  {
+    "namn": "lax",
+    "beskrivning": "lax från norge",
+    "pris": 60,
+    "kategorier": [
+      "fisk",
+      "kött"
+    ]
+  },
+  {
+    "namn": "räkor",
+    "beskrivning": "räkor från sverige",
+    "pris": 80,
+    "kategorier": [
+      "fisk"
+    ]
+  },
+  {
+    "namn": "tonfisk",
+    "beskrivning": "tonfisk från norge",
+    "pris": 100,
+    "kategorier": [
+      "fisk"
+    ]
+  },
+  {
+    "namn": "mjölk",
+    "beskrivning": "mjölk från sverige",
+    "pris": 10,
+    "kategorier": [
+      "mejeri"
+    ]
+  },
+  {
+    "namn": "ost",
+    "beskrivning": "ost från sverige",
+    "pris": 20,
+    "kategorier": [
+      "mejeri"
+    ]
+  },
+  {
+    "namn": "yoghurt",
+    "beskrivning": "yoghurt från sverige",
+    "pris": 15,
+    "kategorier": [
+      "mejeri"
+    ]
+  },
+  {
+    "namn": "glass",
+    "beskrivning": "glass från sverige",
+    "pris": 30,
+    "kategorier": [
+      "mejeri"
+    ]
+  },
+  {
+    "namn": "Tortillabröd 10-pack",
+    "beskrivning": "Tortillabröd original. Gjorda på vete  och kommer i ett 10 pack.",
+    "pris": 20,
+    "kategorier": [
+      "bröd"
+    ]
+  },
+  {
+    "namn": "kakor",
+    "beskrivning": "Kakor fyllda med en mjölkchoklad kräm",
+    "pris": 25,
+    "kategorier": [
+      "bröd"
+    ]
+  },
+  {
+    "namn": "Oreo Original 154g",
+    "beskrivning": "Chokladkakor med vaniljsmakande fyllning. Lika gott till eftermiddagsfikat som till fredagsmyset!",
+    "pris": 15,
+    "kategorier": [
+      "bröd"
+    ]
+  },
+  {
+    "namn": "pasta",
+    "beskrivning": "pasta från sverige",
+    "pris": 10,
+    "kategorier": [
+      "torrvaror"
+    ]
+  },
+  {
+    "namn": "ris",
+    "beskrivning": "ris från sverige",
+    "pris": 15,
+    "kategorier": [
+      "torrvaror"
+    ]
+  },
+  {
+    "namn": "mjöl",
+    "beskrivning": "mjöl från sverige",
+    "pris": 10,
+    "kategorier": [
+      "torrvaror"
+    ]
+  },
+  {
+    "namn": "socker",
+    "beskrivning": "socker från sverige",
+    "pris": 10,
+    "kategorier": [
+      "torrvaror"
+    ]
+  },
+  {
+    "namn": "kaffe",
+    "beskrivning": "kaffe från sverige",
+    "pris": 20,
+    "kategorier": [
+      "dryck"
+    ]
+  },
+  {
+    "namn": "te",
+    "beskrivning": "te från sverige",
+    "pris": 15,
+    "kategorier": [
+      "dryck"
+    ]
+  },
+  {
+    "namn": "juice",
+    "beskrivning": "juice från sverige",
+    "pris": 10,
+    "kategorier": [
+      "dryck"
+    ]
+  },
+  {
+    "namn": "öl",
+    "beskrivning": "öl från sverige",
+    "pris": 20,
+    "kategorier": [
+      "dryck"
+    ]
+  },
+  {
+    "namn": "vin",
+    "beskrivning": "vin från sverige",
+    "pris": 30,
+    "kategorier": [
+      "dryck"
+    ]
+  }
 ]

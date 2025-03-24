@@ -19,9 +19,9 @@ const productsJSON = JSON.parse(
 // Get all products
 router.get("/", async (req, res) => {
   try {
-    //! DONT USE IN PRODUCTION get products from json file
-    res.json(productsJSON);
-    return;
+    // Populera kategorier och visa bara "namn" (och _id).
+    const products = await Product.find().populate("kategorier", "namn");
+    res.json(products);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
