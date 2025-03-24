@@ -17,7 +17,7 @@ const productSchema = new mongoose.Schema({
   },
   unit: {  //Kilos, litres etc...
     type: String,
-    enum: ['kg', 'L'],
+    enum: ['mg', 'g', 'kg', 'ml', 'cl', 'dl', 'l', 'pcs', 'oz', 'lb'],  //pcs = pieces countable items, oz = ounce, lb = pound
     required: true
   },
   amount: {   //The number shown before unit type for a product
