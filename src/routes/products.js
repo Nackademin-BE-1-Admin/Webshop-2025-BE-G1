@@ -46,17 +46,20 @@ router.post("/", adminAuth, async (req, res) => {
 //TODO Delete product (admin only)
 
 // Get products by category
-router.get("/by-category/:categories", async (req, res) => {
+router.get("/by-category/:category", async (req, res) => {
 
-  // ensure there are is a category or categories in the url
-  if (!req.params.categories) {
-    res.status(400)
-    res.json({ error: `You must provide a category or categories. For example: /api/products/by-category/Food,Pets,Furniture` })
+  const category = await Category.findOne({ name: req.params.category })
+
+  if (!category) {
+    res.status(404)
+    res.json({
+      error: `No category by the name of "${req.params.category}" was found. See /api/categories for a list of categories.`
+    })
     return
   }
 
   // fetch products
-  const products = await Product.find({ category: { $in: req.params.categories.split(',') } }).lean();
+  const products = await Product.find({ category: category._id });
 
   // error if no products found
   if (products.length <= 0) {
