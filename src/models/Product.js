@@ -1,4 +1,4 @@
-import {Schema, model} from 'mongoose';
+import { Schema, model } from 'mongoose';
 
 const productSchema = new Schema({
   name: {
@@ -44,7 +44,7 @@ const productSchema = new Schema({
     min: 0
   },
   category: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'category',
     required: true
 
@@ -53,6 +53,4 @@ const productSchema = new Schema({
   timestamps: true
 });
 
-const Product = model('product', productSchema, 'products');
-
-export default Product
+export default model('Product', productSchema);
