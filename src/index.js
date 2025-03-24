@@ -11,6 +11,7 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const MONGODB_URI = process.env.MONGODB_URI
 
 // Middleware
 app.use(cors('*'));
@@ -65,8 +66,8 @@ app.use('/api/categories', categoryRoutes)
 app.use('/api/test', testRouter)
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/hakim-livs')
-  .then(() => console.log('Connected to MongoDB', process.env.MONGODB_URI))
+mongoose.connect(MONGODB_URI || 'mongodb://localhost:27017/hakim-livs')
+  .then(() => console.log('Connected to MongoDB', MONGODB_URI))
   .catch(err => console.error('MongoDB connection error:', err));
 
 app.listen(PORT, () => {

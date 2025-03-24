@@ -2,36 +2,26 @@ import express from "express";
 import Product from "../models/Product.js";
 import Category from "../models/Category.js";
 import { adminAuth } from "../middleware/auth.js";
-import { readFileSync } from "fs";
-import { fileURLToPath } from "url";
-import { dirname, join } from "path";
 
-const router = express.Router();
 
-// Get directory path
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const productRoutes = express.Router();
 
-// Read products JSON file
-const productsJSON = JSON.parse(
-  readFileSync(join(__dirname, "../data/products.json"), "utf8")
-);
 
 // Get all products
-router.get("/", async (req, res) => {
+productRoutes.get("/", async (req, res) => {
   try {
-    //! DONT USE IN PRODUCTION get products from json file
-    res.json(productsJSON);
-    return;
+    // Fetch products directly from the MongoDB database
+    const products = await Product.find();  // This will get all products
+    res.json(products);
   } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+    res.status(500).json({ error: error?.message, errorObj: error });
+}
 });
 
 //TODO Get single product
 
 // Create product (admin only)
-router.post("/", adminAuth, async (req, res) => {
+productRoutes.post("/", adminAuth, async (req, res) => {
   try {
     const product = new Product(req.body);
     await product.save();
@@ -46,7 +36,7 @@ router.post("/", adminAuth, async (req, res) => {
 //TODO Delete product (admin only)
 
 // Get products by category
-router.get("/by-category/:category", async (req, res) => {
+productRoutes.get("/by-category/:category", async (req, res) => {
 
   const category = await Category.findOne({ name: req.params.category })
 
@@ -76,4 +66,4 @@ router.get("/by-category/:category", async (req, res) => {
   
 })
 
-export default router;
+export default productRoutes;
