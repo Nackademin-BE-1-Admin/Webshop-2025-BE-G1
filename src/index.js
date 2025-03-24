@@ -38,6 +38,11 @@ app.get('/api', (req, res) => {
         "POST /api/products": "Create a new product (Admin only)",
         "PUT /api/products/:id": "Update a product (Admin only)",
         "DELETE /api/products/:id": "Delete a product (Admin only)"
+      },
+      test: {
+        "POST /api/test/addProduct": "Add a product",
+        "POST /api/test/addProducts": "Add multiple products",
+        
       }
     },
     authentication: "Use Bearer token in Authorization header for protected routes"
