@@ -15,6 +15,13 @@ const PORT = process.env.PORT || 3000;
 app.use(cors('*'));
 app.use(express.json());
 
+// logger
+app.use((req, res, next) => {
+  console.log(`${req.method} @ ${req.url}`)
+  console.log("BODY:", req.body)
+  next()
+})
+
 // API Documentation route
 app.get('/api', (req, res) => {
   res.json({
