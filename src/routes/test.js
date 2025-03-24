@@ -52,7 +52,7 @@ testRouter.post('/addProducts', async (req, res) => {
             if (!id) {
                 failedProducts.push({
                     product,
-                    error: `No category found by value: ${req.body.category}. Ensure the product's "category" field is either the category name or the category id.`
+                    error: `No category found by value: ${product.category}. Ensure the product's "category" field is either the category name or the category id.`
                 })
                 continue;
             }
@@ -185,7 +185,7 @@ testRouter.delete('/purgeAll', async (req, res) => {
 const validateCategory = async (nameOrId) => {
     try {
 
-        const foundByName = await Category.find({ name: nameOrId })
+        const foundByName = await Category.findOne({ name: nameOrId })
         if (foundByName) return foundByName._id;
 
         const foundById = await Category.findById(nameOrId)
