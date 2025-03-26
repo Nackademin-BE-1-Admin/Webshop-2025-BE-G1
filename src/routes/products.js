@@ -38,8 +38,8 @@ productRoutes.delete("/", adminAuth, async (req, res) => {
   try {
     if (req.body.name) {
       await Product.findOneAndDelete({ name: req.body.name })
-    } else if (req.body.id) {
-      await Product.findByIdAndDelete(req.body.id)
+    } else if (req.body.id || req.body._id) {
+      await Product.findByIdAndDelete(req.body.id || req.body._id)
     } else {
       res.status(400)
       return res.json({ error: `You must provide a name or id field.`})
