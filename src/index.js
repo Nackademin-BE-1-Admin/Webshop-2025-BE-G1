@@ -14,9 +14,10 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(cors({
   origin: 'https://webshop-2025-g11-fe1.vercel.app',
-  allowedHeaders: ['Content-Type', 'Authorization'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
+
 app.use(express.json());
 
 // API Documentation route
