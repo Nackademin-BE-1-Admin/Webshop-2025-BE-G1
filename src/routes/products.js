@@ -11,7 +11,7 @@ const productRoutes = express.Router();
 productRoutes.get("/", async (req, res) => {
   try {
     // Fetch products directly from the MongoDB database
-    const products = await Product.find();  // This will get all products
+    const products = await Product.find().populate('category');  // This will get all products
     res.json(products);
   } catch (error) {
     res.status(500).json({ error: error?.message, errorObj: error });
@@ -36,18 +36,30 @@ productRoutes.post("/", adminAuth, async (req, res) => {
 //TODO Delete product (admin only)
 productRoutes.delete("/", adminAuth, async (req, res) => {
   try {
+    let deletedProduct;
+
     if (req.body.name) {
-      await Product.findOneAndDelete({ name: req.body.name })
+      deletedProduct = await Product.findOneAndDelete({ name: req.body.name })
     } else if (req.body.id || req.body._id) {
-      await Product.findByIdAndDelete(req.body.id || req.body._id)
+      deletedProduct = await Product.findByIdAndDelete(req.body.id || req.body._id)
     } else {
       res.status(400)
       return res.json({ error: `You must provide a name or id field.`})
     }
+
+    if (!deletedProduct) {
+      res.status(404)
+      return res.json({ error: `Product was not deleted as it was not found: "${req.body.id || req.body._id || req.body.name}"` })
+    }
+
     res.json({ message: "Product deleted! "})
   } catch (error) {
     res.status(500)
-    res.json({ error: error?.message })
+    let errorMessage = error?.message || "";
+    if (errorMessage.includes("Cast to ObjectId")) {
+      errorMessage = `Invalid ObjectId.`
+    }
+    res.json({ error: errorMessage })
   }
 })
 
