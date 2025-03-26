@@ -44,6 +44,7 @@ productRoutes.delete("/", adminAuth, async (req, res) => {
       res.status(400)
       return res.json({ error: `You must provide a name or id field.`})
     }
+    res.json({ message: "Product deleted! "})
   } catch (error) {
     res.status(500)
     res.json({ error: error?.message })
