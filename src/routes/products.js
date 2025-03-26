@@ -44,6 +44,21 @@ router.post("/", adminAuth, async (req, res) => {
 //TODO Update product (admin only)
 
 //TODO Delete product (admin only)
+router.delete("/", adminAuth, async (req, res) => {
+  try {
+    if (req.body.name) {
+      await Product.findOneAndDelete({ name: req.body.name })
+    } else if (req.body.id) {
+      await Product.findByIdAndDelete(req.body.id)
+    } else {
+      res.status(400)
+      return res.json({ error: `You must provide a name or id field.`})
+    }
+  } catch (error) {
+    res.status(500)
+    res.json({ error: error?.message })
+  }
+})
 
 // Get products by category
 router.get("/by-category/:category", async (req, res) => {
