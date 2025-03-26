@@ -34,7 +34,7 @@ productRoutes.post("/", adminAuth, async (req, res) => {
 //TODO Update product (admin only)
 
 //TODO Delete product (admin only)
-router.delete("/", adminAuth, async (req, res) => {
+productRoutes.delete("/", adminAuth, async (req, res) => {
   try {
     if (req.body.name) {
       await Product.findOneAndDelete({ name: req.body.name })
