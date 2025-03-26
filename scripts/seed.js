@@ -32,7 +32,7 @@ async function seedDatabase() {
     }));
 
     // Ta bort det tillfälliga fältet(jag gör ej det nu för ska ha kvar infon så att den sparas)
-   // productsWithIds.forEach(p => delete p.kategorier);
+    //productsWithIds.forEach(p => delete p.kategorier);
 
     await Product.insertMany(productsWithIds);
 
