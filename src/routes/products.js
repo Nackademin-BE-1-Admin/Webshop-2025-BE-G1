@@ -66,7 +66,7 @@ productRoutes.delete("/", adminAuth, async (req, res) => {
 // Get products by category
 productRoutes.get("/by-category/:category", async (req, res) => {
 
-  const category = await Category.findOne({ name: req.params.category })
+  const category = await Category.findOne({ name: req.params.category }).populate('category')
 
   if (!category) {
     res.status(404)
