@@ -10,6 +10,11 @@ const products = JSON.parse(fs.readFileSync('./src/data/products.json'))
 seed()
 
 async function seed() {
+    if (!process.env.MONGODB_URI.includes('localhost')) {
+        console.log("Warning: The MONGODB_URI you are using does not include 'localhost'. Process aborted to prevent the production data from being overwritten.")
+        process.exit()
+    }
+
     try {
         console.log(`Trying to connect to the database.`)
         await mongoose.connect(process.env.MONGODB_URI)
