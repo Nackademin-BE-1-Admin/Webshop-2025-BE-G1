@@ -37,10 +37,11 @@ app.get('/api', (req, res) => {
       products: {
         "GET /api/products": "Get all products",
         "GET /api/products/:id": "Get a single product by ID",
+        "GET /api/products/by-category/:category": "Get all products of a given category (No colon!)",
         "POST /api/products": "Create a new product (Admin only)",
-        "PUT /api/products/:id": "Update a product (Admin only)",
-        "DELETE /api/products/:id": "Delete a product (Admin only)",
-        "GET /api/products/by-category/:category": "Get all products of a given category"
+        "PUT /api/products/:id": "Update a product (Admin only) (No colon!)",
+        "DELETE /api/products/": "Delete a product (Admin only with id OR name in JSON body)",
+        "DELETE /api/products/:id": "Delete a product (Admin only with id as the URL parameter [No colon!])",
       },
       categories: {
         "GET /api/categories": "Get all categories"

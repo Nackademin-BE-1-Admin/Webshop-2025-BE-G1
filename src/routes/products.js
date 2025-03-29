@@ -6,7 +6,6 @@ import { adminAuth } from "../middleware/auth.js";
 
 const productRoutes = express.Router();
 
-
 // Get all products
 productRoutes.get("/", async (req, res) => {
   try {
@@ -33,7 +32,7 @@ productRoutes.post("/", adminAuth, async (req, res) => {
 
 //TODO Update product (admin only)
 
-//TODO Delete product (admin only)
+//TODO Delete product (admin only) Using request body
 productRoutes.delete("/", adminAuth, async (req, res) => {
   try {
     let deletedProduct;
@@ -52,7 +51,7 @@ productRoutes.delete("/", adminAuth, async (req, res) => {
       return res.json({ error: `Product was not deleted as it was not found: "${req.body.id || req.body._id || req.body.name}"` })
     }
 
-    res.json({ message: "Product deleted! "})
+    res.json({ message: "Product deleted!", product: deletedProduct })
   } catch (error) {
     res.status(500)
     let errorMessage = error?.message || "";
@@ -62,6 +61,28 @@ productRoutes.delete("/", adminAuth, async (req, res) => {
     res.json({ error: errorMessage })
   }
 })
+
+//TODO Delete product (admin only) Using URL param
+productRoutes.delete("/:id", adminAuth, async (req, res) => {
+  try {
+    let deletedProduct = await Product.findById(req.params.id);
+
+    if (!deletedProduct) {
+      res.status(404)
+      return res.json({ error: `Product was not deleted as it was not found: "${req.body.id || req.body._id || req.body.name}"` })
+    }
+
+    res.json({ message: "Product deleted!", product: deletedProduct })
+  } catch (error) {
+    res.status(500)
+    let errorMessage = error?.message || "";
+    if (errorMessage.includes("Cast to ObjectId")) {
+      errorMessage = `Invalid ObjectId.`
+    }
+    res.json({ error: errorMessage })
+  }
+})
+
 
 // Get products by category
 productRoutes.get("/by-category/:category", async (req, res) => {
