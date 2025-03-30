@@ -1,0 +1,92 @@
+[
+  {
+    "_id": "65a1b2c3d4e5f6a7b8c9d201",
+    "username": "anders_svensson",
+    "password": "password123",
+    "email": "anders.svensson@example.com",
+    "isAdmin": false,
+    "createdAt": "2023-12-10T08:00:00.000Z",
+    "updatedAt": "2023-12-10T08:00:00.000Z"
+  },
+  {
+    "_id": "65a1b2c3d4e5f6a7b8c9d202",
+    "username": "linda_johansson",
+    "password": "admin123",
+    "email": "linda.johansson@example.com",
+    "isAdmin": true,
+    "createdAt": "2023-12-10T08:00:00.000Z",
+    "updatedAt": "2023-12-10T08:00:00.000Z"
+  },
+  {
+    "_id": "65a1b2c3d4e5f6a7b8c9d203",
+    "username": "erik_nyberg",
+    "password": "erik1234",
+    "email": "erik.nyberg@example.com",
+    "isAdmin": false,
+    "createdAt": "2023-12-10T08:00:00.000Z",
+    "updatedAt": "2023-12-10T08:00:00.000Z"
+  },
+  {
+    "_id": "65a1b2c3d4e5f6a7b8c9d204",
+    "username": "anna_karlsson",
+    "password": "anna2023",
+    "email": "anna.karlsson@example.com",
+    "isAdmin": false,
+    "createdAt": "2023-12-10T08:00:00.000Z",
+    "updatedAt": "2023-12-10T08:00:00.000Z"
+  },
+  {
+    "_id": "65a1b2c3d4e5f6a7b8c9d205",
+    "username": "admin_system",
+    "password": "superadmin",
+    "email": "admin@system.com",
+    "isAdmin": true,
+    "createdAt": "2023-12-10T08:00:00.000Z",
+    "updatedAt": "2023-12-10T08:00:00.000Z"
+  },
+  {
+    "_id": "65a1b2c3d4e5f6a7b8c9d206",
+    "username": "mikael_berg",
+    "password": "mikael123",
+    "email": "mikael.berg@example.com",
+    "isAdmin": false,
+    "createdAt": "2023-12-10T08:00:00.000Z",
+    "updatedAt": "2023-12-10T08:00:00.000Z"
+  },
+  {
+    "_id": "65a1b2c3d4e5f6a7b8c9d207",
+    "username": "sara_lindgren",
+    "password": "sara1234",
+    "email": "sara.lindgren@example.com",
+    "isAdmin": false,
+    "createdAt": "2023-12-10T08:00:00.000Z",
+    "updatedAt": "2023-12-10T08:00:00.000Z"
+  },
+  {
+    "_id": "65a1b2c3d4e5f6a7b8c9d208",
+    "username": "johan_nilsson",
+    "password": "johan2023",
+    "email": "johan.nilsson@example.com",
+    "isAdmin": false,
+    "createdAt": "2023-12-10T08:00:00.000Z",
+    "updatedAt": "2023-12-10T08:00:00.000Z"
+  },
+  {
+    "_id": "65a1b2c3d4e5f6a7b8c9d209",
+    "username": "emma_ek",
+    "password": "emma1234",
+    "email": "emma.ek@example.com",
+    "isAdmin": false,
+    "createdAt": "2023-12-10T08:00:00.000Z",
+    "updatedAt": "2023-12-10T08:00:00.000Z"
+  },
+  {
+    "_id": "65a1b2c3d4e5f6a7b8c9d210",
+    "username": "moderator_system",
+    "password": "moderator123",
+    "email": "moderator@system.com",
+    "isAdmin": true,
+    "createdAt": "2023-12-10T08:00:00.000Z",
+    "updatedAt": "2023-12-10T08:00:00.000Z"
+  }
+]

@@ -1,5 +1,6 @@
 import Product from "../models/Product.js";
 import Category from "../models/Category.js";
+import User from "../models/User.js";
 import { Router } from "express";
 
 const testRouter = Router()
@@ -179,6 +180,11 @@ testRouter.delete('/purgeAll', async (req, res) => {
             error: error?.message
         })
     }
+})
+
+testRouter.get('/users', async (req, res) => {
+    const users = await User.find({})
+    res.json(users)
 })
 
 // helpers

@@ -115,6 +115,12 @@ documentRoute({
     url: "/api/test/purgeAll"
 })
 
+documentRoute({
+    name: "Get all users (test)",
+    method: "GET",
+    url: "/api/test/users"
+})
+
 const apiDocumentation = (req, res) => {
     res.json(postmanConfig)
 }

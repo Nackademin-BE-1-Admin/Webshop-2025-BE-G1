@@ -1,11 +1,13 @@
 import fs from 'fs'
 import Category from '../models/Category.js'
 import Product from '../models/Product.js'
+import User from '../models/User.js'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'; dotenv.config();
 
 const categories = JSON.parse(fs.readFileSync('./src/data/categories.json'))
 const products = JSON.parse(fs.readFileSync('./src/data/products.json'))
+const users = JSON.parse(fs.readFileSync('./src/data/users.json'))
 
 seed()
 
@@ -26,8 +28,10 @@ async function seed() {
     }
     await Product.deleteMany({})
     await Category.deleteMany({})
+    await User.deleteMany({})
     await seedOneModel("category", Category, categories)
     await seedOneModel("product", Product, products)
+    await seedOneModel("user", User, users)
     console.log("DONE")
     process.exit()
 }
@@ -43,10 +47,10 @@ async function seedOneModel(modelName, model, array) {
                 item.unit = item.unit.toLowerCase()
             }
             await model.create(item)
-            console.log(`Succeeded seeding ${modelName} "${item.name}".`)
+            console.log(`Succeeded seeding ${modelName} "${item.name || item.username}".`)
         } catch (error) {
             console.log(error)
-            console.log(`Failed seeding ${modelName} "${item.name}". ${error?.message}.`)
+            console.log(`Failed seeding ${modelName} "${item.name || item.username}". ${error?.message}.`)
         }
     }
 }
