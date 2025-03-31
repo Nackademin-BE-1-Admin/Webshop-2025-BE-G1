@@ -121,6 +121,39 @@ documentRoute({
     url: "/api/test/users"
 })
 
+documentRoute({
+    name: "Sign up (test)",
+    method: "POST",
+    url: "/api/test/users",
+    body: {
+        username: "user123",
+        password: "abcdefg",
+        isAdmin: false
+    }
+})
+
+documentRoute({
+    name: "Log in (test)",
+    method: "POST",
+    url: "/api/test/users/login",
+    body: {
+        username: "user123",
+        password: "abcdefg"
+    }
+})
+
+documentRoute({
+    name: "Get me (test)",
+    method: "GET",
+    url: "/api/test/users/me"
+})
+
+documentRoute({
+    name: "Log out (test)",
+    method: "GET",
+    url: "/api/test/users/logout"
+})
+
 const apiDocumentation = (req, res) => {
     res.json(postmanConfig)
 }

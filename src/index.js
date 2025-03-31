@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 import authRoutes from './routes/auth.js';
 import productRoutes from './routes/products.js';
 import testRouter from './routes/test.js';
@@ -17,6 +18,7 @@ const MONGODB_URI = process.env.MONGODB_URI
 // Middleware
 app.use(cors('*'));
 app.use(express.json());
+app.use(cookieParser())
 
 // logger
 app.use((req, res, next) => {
