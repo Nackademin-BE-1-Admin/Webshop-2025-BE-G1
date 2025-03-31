@@ -46,12 +46,13 @@ productRoutes.put("/:id", adminAuth, async (req, res) => {
 
   try {
  
-      const product = await Product.findByIdAndUpdate(id, body, {
-          new: true
-      })
+      const product = await Product.findById(id)
       if(!product) {
           return res.status(404).json({ error: "Product not found" });
       }
+
+      Object.assign(product, body)
+      await product.save()
       res.json(product)
   } catch(error) {
       console.warn("Error updating product", error)
