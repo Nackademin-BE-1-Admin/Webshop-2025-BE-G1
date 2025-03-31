@@ -10,7 +10,7 @@ const products = JSON.parse(fs.readFileSync('./src/data/products.json'))
 seed()
 
 async function seed() {
-    if (!process.env.MONGODB_URI.includes('localhost')) {
+    if (!process.env.MONGODB_URI?.includes('localhost')) {
         console.log("Warning: The MONGODB_URI you are using does not include 'localhost'. Process aborted to prevent the production data from being overwritten.")
         process.exit()
     }
