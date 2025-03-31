@@ -110,7 +110,13 @@ documentRoute({
 })
 
 documentRoute({
-    name: "Delete all products and categories",
+    name: "Delete all users",
+    method: "DELETE",
+    url: "/api/test/purgeUsers"
+})
+
+documentRoute({
+    name: "Delete all products, users and categories",
     method: "DELETE",
     url: "/api/test/purgeAll"
 })
@@ -152,6 +158,18 @@ documentRoute({
     name: "Log out (test)",
     method: "GET",
     url: "/api/test/users/logout"
+})
+
+documentRoute({
+    name: "Insert docs (test)",
+    method: "POST",
+    url: "/api/test/insertDocs",
+    body: {
+        purgeAllFirst: false,
+        users: [],
+        products: [],
+        categories: []
+    }
 })
 
 const apiDocumentation = (req, res) => {
