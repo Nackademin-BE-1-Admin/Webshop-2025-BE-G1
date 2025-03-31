@@ -2,6 +2,8 @@ import express from "express";
 import Product from "../models/Product.js";
 import Category from "../models/Category.js";
 import { adminAuth } from "../middleware/auth.js";
+import mongoose from "mongoose";
+
 
 
 const productRoutes = express.Router();
@@ -34,6 +36,30 @@ productRoutes.post("/", adminAuth, async (req, res) => {
 });
 
 //TODO Update product (admin only)
+productRoutes.put("/:id", adminAuth, async (req, res) => {
+  const {id} = req.params
+  const body = req.body
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ error: "Invalid product ID" });
+  }
+
+  try {
+ 
+      const product = await Product.findByIdAndUpdate(id, body, {
+          new: true
+      })
+      if(!product) {
+          return res.status(404).json({ error: "Product not found" });
+      }
+      res.json(product)
+  } catch(error) {
+      console.warn("Error updating product", error)
+      res.status(500).json({
+          error: error.message || "Error updating product"
+      })
+  }
+} )
 
 //TODO Delete product (admin only) Using request body
 productRoutes.delete("/", adminAuth, async (req, res) => {
