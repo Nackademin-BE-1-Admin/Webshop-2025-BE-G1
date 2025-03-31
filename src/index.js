@@ -8,6 +8,7 @@ import productRoutes from './routes/products.js';
 import testRouter from './routes/test.js';
 import apiDocumentation from './routes/documentation.js';
 import categoryRoutes from './routes/categories.js';
+import { mustBeDeveloper } from './middleware/test.js';
 
 dotenv.config();
 
@@ -35,7 +36,7 @@ app.get("/api", apiDocumentation)
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/categories', categoryRoutes)
-app.use('/api/test', testRouter)
+app.use('/api/test', mustBeDeveloper, testRouter)
 
 // Connect to MongoDB
 mongoose.connect(MONGODB_URI || 'mongodb://localhost:27017/hakim-livs')

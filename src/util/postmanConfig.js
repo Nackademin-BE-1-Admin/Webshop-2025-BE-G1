@@ -30,11 +30,17 @@ export const documentRoute = (options) => {
                 host: ["{{base_url}}"],
                 path: options.url.slice(1)
             },
-            header: [{key: 'Content-Type', value: 'application/json'}],
-            body: {
-                mode: "raw",
-                raw: JSON.stringify(options.body || "", null, 2)
-            }
+            header: [
+                {key: 'Content-Type', value: 'application/json'},
+                {key: 'x-dev-api-key', value: 'jonatan'}
+            ],
+        }
+    }
+
+    if (options.body) {
+        route.request.body = {
+            mode: "raw",
+            raw: JSON.stringify(option.body, null, 2)
         }
     }
 
