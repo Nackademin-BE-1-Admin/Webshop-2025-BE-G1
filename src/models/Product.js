@@ -22,7 +22,8 @@ const productSchema = new Schema({
   },
   amount: {   //The number shown before unit type for a product
     type: Number,
-    required: true
+    required: true,
+    min: 0
   },
   brand:  {
     type: String,
