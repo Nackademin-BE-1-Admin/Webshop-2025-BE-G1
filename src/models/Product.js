@@ -4,23 +4,42 @@ const productSchema = new mongoose.Schema({
   namn: {
     type: String,
     required: true,
-    trim: true,
+    trim: true
   },
   beskrivning: {
     type: String,
-    default: "",
+    default: ""
   },
   pris: {
     type: Number,
     required: true,
-    min: 0,
+    min: 0
   },
-  kategorier: [
-    {
+  kategorier: [{
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Category",
+      ref: "Category"
+    }],
+    varumarke: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Brand"
     },
-  ],
+    leverantor: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Supplier"
+    },
+    jamforpris: {
+      type: String
+    },
+    innehallsforteckning: {
+      type: String
+    },
+    bild: {
+      type: String
+    },
+    mangd: {
+      type: String
+    },
+  
 }, {
   timestamps: true,
 });

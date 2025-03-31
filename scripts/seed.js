@@ -1,40 +1,70 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import fs from "fs";
 import Category from "../src/models/Category.js";
 import Product from "../src/models/Product.js";
-import fs from "fs";
+import Brand from "../src/models/Brand.js";
+import Supplier from "../src/models/Supplier.js";
 
 dotenv.config();
 
 async function seedDatabase() {
   try {
-    await mongoose.connect(process.env.MONGODB_URI /*  || "mongodb://localhost:27017/hakim-livs"*/);
+    await mongoose.connect(process.env.MONGODB_URI);
 
     // Rensa databasen
     await Category.deleteMany();
     await Product.deleteMany();
+    await Brand.deleteMany();
+    await Supplier.deleteMany();
 
     // Ladda kategorier
     const categoriesData = JSON.parse(fs.readFileSync("./src/data/categories.json"));
     const createdCategories = await Category.insertMany(categoriesData);
-
-    // Gör ett lookup-objekt
     const categoryMap = {};
     createdCategories.forEach(cat => {
-      categoryMap[cat.namn] = cat._id;
+      categoryMap[cat.namn.toLowerCase()] = cat._id;
     });
 
     // Ladda produkter
     const productsData = JSON.parse(fs.readFileSync("./src/data/products.json"));
-    const productsWithIds = productsData.map(p => ({
-      ...p,
-      kategorier: p.kategorier.map(namn => categoryMap[namn]),
+
+    // Skapa varumärken
+    const uniqueBrands = [...new Set(productsData.map(p => p["varumärke"]).filter(Boolean))];
+    const brandsData = uniqueBrands.map(namn => ({ namn }));
+    const createdBrands = await Brand.insertMany(brandsData);
+
+    // Skapa brand-lookup
+    const brandMap = {};
+    createdBrands.forEach(brand => {
+      brandMap[brand.namn] = brand._id;
+    });
+
+    // 1. Ladda leverantörer från suppliers.json
+    const suppliersData = JSON.parse(fs.readFileSync("./src/data/suppliers.json"));
+    const createdSuppliers = await Supplier.insertMany(suppliersData);
+
+    // 2. Välj en (eller slumpa) leverantör
+    //    Exempelvis: den första i listan
+    const supplier = createdSuppliers[0];
+
+    // Mappa produkter
+    const productsWithRefs = productsData.map(p => ({
+      namn: p.namn || p.name,
+      beskrivning: p.beskrivning || p.description || "",
+      pris: p.pris || p.price,
+      kategorier: (p.kategorier || p.category || [])
+        .map(namn => categoryMap[namn.toLowerCase()])
+        .filter(Boolean),
+      varumarke: brandMap[p["varumärke"]] || null,
+      leverantor: supplier._id, // <-- Nu är variabeln supplier definierad
+      jamforpris: p["jämförelsepris"] || "",
+      innehallsforteckning: p["innehållsförteckning"] || "",
+      bild: p.bild || "",
+      mangd: p.mängd || p.mangd || ""
     }));
 
-    // Ta bort det tillfälliga fältet(jag gör ej det nu för ska ha kvar infon så att den sparas)
-    //productsWithIds.forEach(p => delete p.kategorier);
-
-    await Product.insertMany(productsWithIds);
+    await Product.insertMany(productsWithRefs);
 
     console.log("✅ Seed complete!");
     process.exit();
