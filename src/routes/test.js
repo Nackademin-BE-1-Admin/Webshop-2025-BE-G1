@@ -199,8 +199,15 @@ testRouter.delete('/purgeAll', async (req, res) => {
 })
 
 testRouter.get('/users', async (req, res) => {
-    const users = await User.find({})
-    res.json(users)
+    try {    
+        console.log('finding users')
+        const users = await User.find({})
+        res.json(users)
+    } catch (error) {
+        console.log(error)
+        res.status(500)
+        res.json({ error: error?.message })
+    }
 })
 
 testRouter.post('/users', async (req, res) => {

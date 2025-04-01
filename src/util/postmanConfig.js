@@ -40,7 +40,7 @@ export const documentRoute = (options) => {
     if (options.body) {
         route.request.body = {
             mode: "raw",
-            raw: JSON.stringify(option.body, null, 2)
+            raw: JSON.stringify(options.body, null, 2)
         }
     }
 
