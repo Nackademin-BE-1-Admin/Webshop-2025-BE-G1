@@ -18,11 +18,23 @@ productRoutes.get("/", async (req, res) => {
     });  // This will get all products
     res.json(products);
   } catch (error) {
-    res.status(500).json({ error: error?.message, errorObj: error });
+    res.status(500).json({ error: error?.message });
 }
 });
 
 //TODO Get single product
+productRoutes.get("/:id", async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id)
+    if (!product) {
+      res.status(404).json({ error: "Product not found" })
+      return
+    }
+    res.json(product)
+  } catch (error) {
+    res.status(500).json({ error: error?.message })
+  }
+})
 
 // Create product (admin only)
 productRoutes.post("/", adminAuth, async (req, res) => {
