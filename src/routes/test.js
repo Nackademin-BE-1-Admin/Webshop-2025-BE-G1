@@ -213,7 +213,7 @@ testRouter.get('/users', async (req, res) => {
 testRouter.post('/users', async (req, res) => {
     try {
         const newUser = await User.create(req.body)
-        const token = jwt.sign({username: newUser.username}, process.env.JWT_SECRET, { expiresIn: "2w"})
+        const token = jwt.sign(toUserDTO(newUser), process.env.JWT_SECRET, { expiresIn: "2w"})
 
         res.cookie('hakim-livs-token', token)
 
@@ -229,11 +229,11 @@ testRouter.post('/users', async (req, res) => {
 
 testRouter.post('/users/login', async (req, res) => {
     try {
-        const foundUser = await User.findOne({ username: req.body.username }).lean()
-        if (!foundUser) throw { message: "Username doesn't match any documents." };
+        const foundUser = await User.findOne({ email: req.body.email }).lean()
+        if (!foundUser) throw { message: "Email doesn't match any documents." };
         const validPassword = await bcrypt.compare(req.body.password, foundUser.password)
         if (!validPassword) throw { message: "Password is wrong." }
-        const token = jwt.sign(foundUser, process.env.JWT_SECRET || "livs-hakim", { expiresIn: "2w"})
+        const token = jwt.sign(toUserDTO(foundUser), process.env.JWT_SECRET || "livs-hakim", { expiresIn: "2w"})
         res.cookie('hakim-livs-token', token)
 
         res.json({
@@ -256,8 +256,8 @@ testRouter.get('/users/me', async (req, res) => {
         const userData = jwt.verify(token, process.env.JWT_SECRET || "livs-hakim")
 
         // find user
-        const foundUser = await User.findOne({ username: userData.username })
-        if (!foundUser) throw { message: "The cookie contained a valid token but it did not reference an existing user. Maybe the user no longer exists, or has changed their username." };
+        const foundUser = await User.findOne({ email: userData.email })
+        if (!foundUser) throw { message: "The cookie contained a valid token but it did not reference an existing user. Maybe the user no longer exists, or has changed their email." };
 
         res.json(toUserDTO(foundUser))
 

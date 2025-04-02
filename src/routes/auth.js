@@ -39,17 +39,17 @@ router.get('/me', async (req, res) => {
 
     const userData = jwt.verify(token, process.env.JWT_SECRET || 'livs-hakim')
 
-    if (!userData || !userData?.username) {
+    if (!userData || !userData?.email) {
       res.status(400)
       res.json({ error: 'Your token is invalid. Maybe it expired?' })
       return
     }
 
-    const foundUser = await User.findOne({ username: userData.username })
+    const foundUser = await User.findOne({ email: userData.email })
 
     if (!foundUser) {
       res.status(404)
-      res.json({ error: 'Your token was valid but did not match any users in the database. Maybe the user was deleted or has changed their name?' })
+      res.json({ error: 'Your token was valid but did not match any users in the database. Maybe the user was deleted or has changed their email?' })
       return
     }
 
