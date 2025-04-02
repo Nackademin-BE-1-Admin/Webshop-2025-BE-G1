@@ -169,4 +169,23 @@ productRoutes.get("/by-category/:category", async (req, res) => {
   
 })
 
+productRoutes.get("/by-price/:min/:max", async (req, res) => {
+  try {
+    let { min, max } = req.params
+    min = Number(min) || 0;
+    max = Number(max) || Infinity;
+
+    const products = await Product.find({ 
+      price: {
+        $gte: min,
+        $lte: max
+      }
+    })
+
+    res.json(products)
+  } catch (error) {
+    res.status(500).json({ error: error?.message })
+  }
+})
+
 export default productRoutes;
