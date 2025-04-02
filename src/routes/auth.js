@@ -4,6 +4,7 @@ import User from "../models/User.js";
 import { toUserDTO } from "../util/dto.js";
 import { getToken } from '../util/getToken.js';
 import dotenv from 'dotenv';
+import bcrypt from 'bcrypt';
  dotenv.config();
 
 const router = express.Router();
