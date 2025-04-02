@@ -20,6 +20,12 @@ documentRoute({
 })
 
 documentRoute({
+    name: "Get all proucts between two given prices",
+    method: "GET",
+    url: "/api/products/by-price/:min/:max"
+})
+
+documentRoute({
     name: "Create a new product (admin only)",
     method: "POST",
     url: "/api/products",
@@ -54,6 +60,18 @@ documentRoute({
     name: "Get all categories",
     method: "GET",
     url: "/api/categories"
+})
+
+// User routes
+documentRoute({
+    name: "Sign up (sets token cookie)",
+    method: "POST",
+    url: "/api/users",
+    body: {
+        username: "username here",
+        password: "password here",
+        email: "email here"
+    }
 })
 
 // Test routes
