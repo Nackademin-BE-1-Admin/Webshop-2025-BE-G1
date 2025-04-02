@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import { toUserDTO } from "../util/dto.js";
 import { getToken } from '../util/getToken.js';
-import dotenv from 'dotenv';import { toUserDTO } from "../util/dto.js";
+import dotenv from 'dotenv';
  dotenv.config();
 
 const router = express.Router();
