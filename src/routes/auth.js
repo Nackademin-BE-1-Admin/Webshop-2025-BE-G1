@@ -1,8 +1,10 @@
 import express from "express";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
+import { toUserDTO } from "../util/dto.js";
 import { getToken } from '../util/getToken.js';
-import dotenv from 'dotenv'; dotenv.config();
+import dotenv from 'dotenv';import { toUserDTO } from "../util/dto.js";
+ dotenv.config();
 
 const router = express.Router();
 
@@ -57,5 +59,27 @@ router.get('/me', async (req, res) => {
 })
 
 //TODO Login
+router.post('/users/login', async (req, res) => {
+  try {
+    const foundUser = await User.findOne({ username: req.body.username }).lean()
+    if (!foundUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const validPassword = await bcrypt.compare(req.body.password, foundUser.password)
+    if (!validPassword) {
+      return res.status(401).json({ message: "Password is incorrect" })
+    }
+      const token = jwt.sign(foundUser, process.env.JWT_SECRET || "livs-hakim", { expiresIn: "2w"})
+      res.cookie('hakim-livs-token', token)
+
+      res.json({
+        user: toUserDTO(foundUser),
+        token
+      })
+    
+  } catch (error) {
+    res.status(400).json({error: error?.message})
+  }
+})
 
 export default router;
