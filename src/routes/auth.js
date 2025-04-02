@@ -62,7 +62,7 @@ router.get('/me', async (req, res) => {
 //TODO Login
 router.post('/users/login', async (req, res) => {
   try {
-    const foundUser = await User.findOne({ firstName: req.body.firstName }).lean()
+    const foundUser = await User.findOne({ email: req.body.email }).lean()
     if (!foundUser) {
       return res.status(404).json({ message: "User not found" });
     }
