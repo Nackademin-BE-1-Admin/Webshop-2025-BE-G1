@@ -66,7 +66,7 @@ documentRoute({
 documentRoute({
     name: "Sign up (sets token cookie)",
     method: "POST",
-    url: "/api/users/signup",
+    url: "/api/auth/signup",
     body: {
         email: "email here",
         firstName: "first name",
@@ -78,7 +78,7 @@ documentRoute({
 documentRoute({
     name: "Log in (sets token cookie)",
     method: "POST",
-    url: "/api/users/login",
+    url: "/api/auth/login",
     body: {
         email: "email",
         password: "password"
@@ -88,7 +88,7 @@ documentRoute({
 documentRoute({
     name: "Get 'me' (user data) [must have cookie called hakim-livs-token]",
     method: "GET",
-    url: "/api/users/me"
+    url: "/api/auth/me"
 })
 
 // Test routes
