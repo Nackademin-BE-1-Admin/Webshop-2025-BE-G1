@@ -14,7 +14,7 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/hakim-livs";
 
 // Middleware
 app.use(cors("*"));
@@ -43,19 +43,15 @@ app.use("/api/products", productRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/test", mustBeDeveloper, testRouter);
 
-async function connect() {
-  try {
-    console.log("Trying to connect...")
-    await mongoose.connect(MONGODB_URI || "mongodb://localhost:27017/hakim-livs")
-    console.log(`Connected to MongoDB. URI = ${MONGODB_URI || "mongodb://localhost:27017/hakim-livs"}`)
-  } catch (error) {
-    console.log(error)
-    console.log(`⬆⬆⬆ Failed connecting ⬆⬆⬆`)
-  }
-}
-
 app.listen(PORT,() => {
-  connect()
+  mongoose.connect(MONGODB_URI)
+    .then(() => {
+      console.log(`Connected, `, MONGODB_URI)
+    })
+    .catch((err) => {
+      console.log("Failed connecting to MONGO")
+      console.log(err)
+    })
   console.log(`Server running on port ${PORT}`);
   console.log(`http://localhost:${PORT}`)
 });
