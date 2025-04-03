@@ -23,14 +23,19 @@ app.use(cookieParser());
 
 // logger
 app.use((req, res, next) => {
+  console.log(`\n\n--- New request ---`)
   console.log(`${req.method} @ ${req.url}`);
   console.log("BODY:", req.body);
+
+  res.on('finish', () => {
+    console.log(`- END of ${req.method}${req.url} -`)
+  })
+
   next();
 });
 
 // API Documentation route
-app.get("/", apiDocumentation);
-app.get("/api", apiDocumentation);
+app.get(["/", "/api", "/api/"], apiDocumentation);
 
 // Routes
 app.use("/api/auth", authRoutes);
@@ -38,12 +43,19 @@ app.use("/api/products", productRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/test", mustBeDeveloper, testRouter);
 
-// Connect to MongoDB
-mongoose
-  .connect(MONGODB_URI || "mongodb://localhost:27017/hakim-livs")
-  .then(() => console.log("Connected to MongoDB", MONGODB_URI))
-  .catch((err) => console.error("MongoDB connection error:", err));
+async function connect() {
+  try {
+    console.log("Trying to connect...")
+    await mongoose.connect(MONGODB_URI || "mongodb://localhost:27017/hakim-livs")
+    console.log(`Connected to MongoDB. URI = ${MONGODB_URI || "mongodb://localhost:27017/hakim-livs"}`)
+  } catch (error) {
+    console.log(error)
+    console.log(`⬆⬆⬆ Failed connecting ⬆⬆⬆`)
+  }
+}
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
+  await connect()
   console.log(`Server running on port ${PORT}`);
+  console.log(`http://localhost:${PORT}`)
 });
