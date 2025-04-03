@@ -10,6 +10,7 @@ const productRoutes = express.Router();
 
 // Get all products
 productRoutes.get("/", async (req, res) => {
+  return res.json([])
   try {
     // Fetch products directly from the MongoDB database
     const products = await Product.find().populate({
