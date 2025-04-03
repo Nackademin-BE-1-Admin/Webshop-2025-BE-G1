@@ -54,8 +54,10 @@ async function connect() {
   }
 }
 
-app.listen(PORT, async () => {
-  await connect()
+app.listen(PORT,() => {
+  connect()
   console.log(`Server running on port ${PORT}`);
   console.log(`http://localhost:${PORT}`)
 });
+
+// 
